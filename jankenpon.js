@@ -61,7 +61,41 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-const playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
-const computerSelection = getComputerChoice();
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+function playGame() {
+    let playerWins = 0;
+    let computerWins = 0;
+    let winner = "";
+
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
+        const computerSelection = getComputerChoice();
+        console.log(computerSelection);
+        playRound(playerSelection, computerSelection);
+        if (playRound(playerSelection, computerSelection) === "win") {
+            ++playerWins;
+            console.log(`You have won ${playerWins} round(s)`);
+        } else if (playRound(playerSelection, computerSelection) === "lose") {
+            ++computerWins
+            console.log(`Computer has won ${computerWins} round(s)`);
+        } else if (playRound(playerSelection, computerSelection) === "draw") {
+            console.log("It's a draw");
+        } else {
+            ++computerWins
+            console.log('You tried to cheat, computer gets the point');
+        }
+    }
+
+    let result = "";
+    if (playerWins > computerWins) {
+        result = "win"
+    } else if (playerWins < computerWins) {
+        result = "loss"
+    } else {
+        result = "draw"
+    }
+
+    console.log(`Final score is ${playerWins} to ${computerWins}, it is a ${result}!`);
+}
+
+
+playGame();
