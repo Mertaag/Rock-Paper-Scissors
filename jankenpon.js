@@ -23,37 +23,28 @@ function playRound(playerSelection, computerSelection) {
         switch (computerSelection) {
             case "rock":
                 return "draw";
-                break;
             case "paper":
                 return "lose";
-                break;
             case "scissors":
                 return "win";
-                break;
         }
     } else if (playerSelection === "paper") {
         switch (computerSelection) {
             case "rock":
                 return "win";
-                break;
             case "paper":
                 return "draw";
-                break;
             case "scissors":
                 return "lose";
-                break;
         }
     } else if (playerSelection === "scissors") {
         switch (computerSelection) {
             case "rock":
                 return "lose";
-                break;
             case "paper":
                 return "win";
-                break;
             case "scissors":
                 return "draw";
-                break;
         }
     } else {
         return "User input error"
