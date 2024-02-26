@@ -52,41 +52,60 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-function playGame() {
-    let playerWins = 0;
-    let computerWins = 0;
-    let winner = "";
+const buttons = document.querySelector('#buttons');
+const results = document.querySelector('#results');
+let para = '';
 
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
-        const computerSelection = getComputerChoice();
-        console.log(computerSelection);
-        playRound(playerSelection, computerSelection);
-        if (playRound(playerSelection, computerSelection) === "win") {
-            ++playerWins;
-            console.log(`You have won ${playerWins} round(s)`);
-        } else if (playRound(playerSelection, computerSelection) === "lose") {
-            ++computerWins
-            console.log(`Computer has won ${computerWins} round(s)`);
-        } else if (playRound(playerSelection, computerSelection) === "draw") {
-            console.log("It's a draw");
-        } else {
-            ++computerWins
-            console.log('You tried to cheat, computer gets the point');
-        }
+buttons.addEventListener('click', (event) => {
+    let target = event.target;
+
+    switch (target.id) {
+        case 'rock':
+            para = document.createElement('P');
+            results.appendChild(para);
+            para.textContent = (playRound('rock', getComputerChoice()));
+            winCounter();
+            break;
+        case 'paper':
+            para = document.createElement('P');
+            results.appendChild(para);
+            para.textContent = (playRound('rock', getComputerChoice()));
+            winCounter();
+            break;
+        case 'scissors':
+            para = document.createElement('P');
+            results.appendChild(para);
+            para.textContent = (playRound('rock', getComputerChoice()));
+            winCounter();
+            break;
+    }
+})
+
+let playerWins = 0;
+let computerWins = 0;
+
+function winCounter() {
+    if (para.textContent === 'win') {
+        ++playerWins;
+    } else if (para.textContent === 'lose') {
+        ++computerWins;
     }
 
-    let result = "";
-    if (playerWins > computerWins) {
-        result = "win"
-    } else if (playerWins < computerWins) {
-        result = "loss"
+    let score = document.querySelector('#score');
+
+    if (playerWins < 5 && computerWins < 5) {
+        score.textContent = `the score is ${playerWins} to ${computerWins}`;
+    } else if (playerWins >= 5) {
+        score.textContent = `the score is ${playerWins} to ${computerWins}, you WIN!`;
+        results.innerHTML = '';
+        playerWins = 0;
+        computerWins = 0;
     } else {
-        result = "draw"
+        score.textContent = `the score is ${playerWins} to ${computerWins}, you LOSE :(`;
+        results.innerHTML = '';
+        playerWins = 0;
+        computerWins = 0;
     }
-
-    console.log(`Final score is ${playerWins} to ${computerWins}, it is a ${result}!`);
 }
 
 
-playGame();
